@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Story</title>
+    <style>
+        :root {
+            --pink: #ff4d6d;
+            --dark-pink: #c9184a;
+            --bg: #fff5f5;
+        }
+
+        body {
+            background-color: var(--bg);
+            margin: 0;
+            font-family: 'Georgia', serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* --- THE TIMELINE LINE --- */
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 40px 0;
+        }
+
+        /* The vertical line in the middle for Desktop */
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background: var(--pink);
+            top: 0; bottom: 0; left: 50%;
+            margin-left: -2px;
+        }
+
+        /* --- MEMORY CARDS --- */
+        .container {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .container.show { opacity: 1; transform: translateY(0); }
+
+        .left { left: 0; text-align: right; }
+        .right { left: 50%; text-align: left; }
+
+        /* Timeline Icons */
+        .container::after {
+            content: '🌸';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            right: -15px;
+            top: 20px;
+            z-index: 1;
+            background: var(--bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .right::after { left: -15px; }
+
+        .card {
+            background: white;
+            padding: 15px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(255, 77, 109, 0.2); }
+
+        .card img {
+            width: 100%;
+            border-radius: 15px;
+            margin-bottom: 10px;
+            object-fit: cover;
+            max-height: 450px; /* Increased for mobile viewing */
+        }
+
+        .date { color: var(--dark-pink); font-weight: bold; font-size: 0.85rem; display: block; margin-bottom: 5px; }
+        .note { 
+            display: none; 
+            margin-top: 10px; 
+            padding-top: 10px; 
+            border-top: 1px dashed #ffb3c1;
+            font-style: italic;
+            color: #666;
+            animation: fadeIn 0.5s forwards;
+            text-align: justify; /* Justified as requested earlier */
+        }
+
+        /* --- FOOTER & BUTTON --- */
+        .footer { text-align: center; padding: 80px 0 120px; }
+        .next-btn {
+            background: var(--pink);
+            color: white;
+            padding: 18px 50px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            box-shadow: 0 10px 20px rgba(255, 77, 109, 0.4);
+            transition: 0.3s;
+            display: inline-block;
+        }
+        .next-btn:hover { background: var(--dark-pink); }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* --- MOBILE RESPONSIVE SETTINGS --- */
+        @media screen and (max-width: 768px) {
+            /* Move line to the left side */
+            .timeline::after { left: 31px; }
+
+            /* Make containers full width */
+            .container {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+                text-align: left !important; /* Ensure text isn't right-aligned on mobile */
+            }
+
+            /* Move icons to the left line */
+            .container::after {
+                left: 16px;
+                right: auto;
+            }
+
+            /* Reset the right-side containers to start from the left */
+            .right {
+                left: 0;
+            }
+            
+            h1 { font-size: 2rem !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <div style="text-align: center; padding: 60px 20px;">
+        <h1 style="color: var(--dark-pink); font-size: 2.8rem; margin-bottom: 10px;">Our Journey</h1>
+        <p style="color: #888;">Every picture has a hidden note. Tap to read them... ❤️</p>
+    </div>
+
+    <div class="timeline">
+        <div class="container left">
+            <div class="card" onclick="showNote(this)">
+                <span class="date">The Day we First Met!!</span>
+                <img src="1.jpeg" alt="Memory 1">
+                <p class="note">11.06.2025 I remember the first day we met like it was yesterday. We met and had our first ice cream together and later in the evening you were there outside my house in your pink raincoat waiting for me!!!!🤭 </p>
+            </div>
+        </div>
+
+        <div class="container right">
+            <div class="card" onclick="showNote(this)">
+                <span class="date">DATE 2</span>
+                <img src="2.jpeg" alt="Memory 2">
+                <p class="note"> Our second day ever and you already wanted to kill me for being 10 minutes late (only) but then you did that little twirl for me so all was forgiven. Only you could make 10 minutes feel like 10 hours. 😂❤️</p>
+            </div>
+        </div>
+
+        <div class="container left">
+            <div class="card" onclick="showNote(this)">
+                <span class="date">15.06.2025</span>
+                <img src="3.jpeg" alt="Memory 3">
+                <p class="note">We met after church and i learnt that your favourite tea is "sha saw" 😂😂</p>
+            </div>
+        </div>
+
+        <div class="container right">
+            <div class="card" onclick="showNote(this)">
+                <span class="date">Baby's day out 🤭😂</span>
+                <img src="4.jpeg" alt="Memory 4">
+                <p class="note">We had a good time here as we listen to some of your favourite songs (Noah Kahan playlist)❤️ </p>
+            </div>
+        </div>
+
+        <div class="container left">
+            <div class="card" onclick="showNote(this)">
+                <span class="date">Game Day</span>
+                <img src="5.jpeg" alt="Memory 5">
+                <p class="note">A day well spent as we played fifa together and it was fun watching you assault every defenders on the pitch. I'm pretty sure you mistaken Fifa match for a UFC match😂😂 </p>
+            </div>
+        </div>
+
+        <div class="container right">
+            <div class="card" onclick="showNote(this)">
+                <span class="date">19.12.2025</span>
+                <img src="6.jpeg" alt="Memory 6">
+                <p class="note">Came back home after 5 months away from you and you were right there waiting for me 🥺❤️</p>
+            </div>
+        </div>
+
+        <div class="container left">
+            <div class="card" onclick="showNote(this)">
+                <span class="date">First Church Service together</span>
+                <img src="7.jpeg" alt="Memory 7">
+                <p class="note">Grateful to have spend the Pre-Christmas service together with you 🥺❤️</p>
+            </div>
+        </div>
+
+        <div class="container right">
+            <div class="card" onclick="showNote(this)">
+                <span class="date">Karaoke Night</span>
+                <img src="8.jpeg" alt="Memory 8">
+                <p class="note">I remember we sang and dance to our favourite songs and later on in the evening we attended our first christmas Eve service together. Lovely evening!!</p>
+            </div>
+        </div>
+
+        <div class="container left">
+            <div class="card" onclick="showNote(this)">
+                <span class="date">❤️</span>
+                <img src="9.jpeg" alt="Memory 9">
+                <p class="note">After countless fights but I love how we always find our way back to each other ❤️</p>
+            </div>
+        </div>
+
+        <div class="container right">
+            <div class="card" onclick="showNote(this)">
+                <span class="date">30.12.25</span>
+                <img src="10.jpeg" alt="Memory 10">
+                <p class="note">The day we made a promise for each other (my future wife)</p>
+            </div>
+        </div>
+
+        <div class="container left">
+            <div class="card" onclick="showNote(this)">
+                <span class="date">03.01.26</span>
+                <img src="11.jpeg" alt="Memory 11">
+                <p class="note">I’m still so happy about the surprise you planned for my birthday. Looking back at this photo, I realize that the best part of the day wasn't the party or the gifts it was having you by my side. Thank you for making me feel so special and for being the best part of my life. I love you! 🎂❤️</p>
+            </div>
+        </div>
+
+        <div class="container right">
+            <div class="card" onclick="showNote(this)">
+                <span class="date">02.01.26</span>
+                <img src="12.jpeg" alt="Memory 12">
+                <p class="note">We watched as the sun said goodbye 🥺💌.</p>
+            </div>
+        </div>
+
+        <div class="container left">
+            <div class="card" onclick="showNote(this)">
+                <span class="date">To Infinity and Beyond ♾️</span>
+                <img src="13.jpeg" alt="Memory 13">
+                <p class="note">Eight months down, and I’m still so glad I found you. You are my favorite part of every single day, and I know that the best is yet to come for us. Happy Valentine's Day, baby. I love you! ❤️✨</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <a href="video.html" class="next-btn">One Final Surprise →</a>
+    </div>
+
+    <script>
+        // Scroll Animation Logic
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.container').forEach(c => observer.observe(c));
+
+        // Click Logic
+        function showNote(card) {
+            const note = card.querySelector('.note');
+            note.style.display = (note.style.display === 'block') ? 'none' : 'block';
+        }
+    </script>
+</body>
+</html>
+
+

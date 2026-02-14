@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You</title>
+    <style>
+        :root {
+            --lily-white: #ffffff;
+            --lily-center: #fdf0d5;
+            --stem-green: #2d6a4f;
+            --ribbon-red: #d62828;
+            --soft-pink: #fff0f3;
+        }
+
+        body {
+            background-color: var(--soft-pink);
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Georgia', serif;
+            overflow: hidden;
+        }
+
+        /* --- FLOATING BACKGROUND --- */
+        .bg-elements {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .heart, .bg-flower {
+            position: absolute;
+            bottom: -50px;
+            opacity: 0.6;
+            animation: floatUp 6s linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.6; }
+            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* --- BOUQUET CONTAINER --- */
+        .container {
+            position: relative;
+            width: 100%;
+            height: 550px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            z-index: 10;
+        }
+        
+        .bouquet { 
+            position: relative; 
+            animation: present 1.2s ease-out forwards; 
+        }
+        
+        .flower {
+            position: absolute;
+            bottom: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transform-origin: bottom center;
+        }
+
+        /* Tighter positioning for a "held close" look */
+        .f1 { transform: rotate(-18deg); left: -45px; }
+        .f2 { transform: rotate(-8deg); left: -20px; }
+        .f3 { transform: rotate(0deg); left: 0px; }
+        .f4 { transform: rotate(8deg); left: 20px; }
+        .f5 { transform: rotate(18deg); left: 45px; }
+        .f6 { transform: rotate(-12deg); left: -25px; bottom: 85px; z-index: 3; }
+        .f7 { transform: rotate(12deg); left: 25px; bottom: 85px; z-index: 3; }
+        .f8 { transform: rotate(0deg); left: 0px; bottom: 100px; z-index: 4; }
+
+        .petals { position: relative; width: 60px; height: 60px; }
+        .petal {
+            position: absolute; background: var(--lily-white); width: 30px; height: 55px;
+            border-radius: 50% 50% 50% 50% / 80% 80% 20% 20%; left: 15px;
+            transform-origin: bottom center; border: 0.5px solid #eee;
+            box-shadow: inset 0 -8px 8px var(--lily-center);
+        }
+        .p1 { transform: rotate(0deg); } .p2 { transform: rotate(60deg); } .p3 { transform: rotate(120deg); }
+        .p4 { transform: rotate(180deg); } .p5 { transform: rotate(240deg); } .p6 { transform: rotate(300deg); }
+        
+        .stem { width: 6px; height: 260px; background: var(--stem-green); border-radius: 10px; }
+        
+        /* --- BIGGER BOW --- */
+        .bow-container {
+            position: absolute;
+            bottom: 90px;
+            left: 50%;
+            transform: translateX(-50%) scale(0);
+            z-index: 20;
+            animation: popIn 0.8s cubic-bezier(0.17, 0.89, 0.32, 1.49) forwards 1.5s;
+        }
+
+        .bow-center {
+            width: 35px; height: 35px; background: var(--ribbon-red);
+            border-radius: 50%; position: relative; z-index: 5;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+        }
+
+        .loop {
+            width: 75px; height: 60px; background: var(--ribbon-red);
+            border-radius: 50%; position: absolute; top: -10px;
+            border: 3px solid #b91d1d;
+        }
+        .loop.left { left: -65px; transform: rotate(-25deg); }
+        .loop.right { right: -65px; transform: rotate(25deg); }
+
+        .tail {
+            width: 15px; height: 70px; background: var(--ribbon-red);
+            position: absolute; top: 20px; z-index: 1;
+        }
+        .tail.left { left: -5px; transform: rotate(25deg); border-radius: 0 0 5px 5px; }
+        .tail.right { right: -5px; transform: rotate(-25deg); border-radius: 0 0 5px 5px; }
+
+        .message { margin-top: 30px; color: #c9184a; opacity: 0; animation: fadeIn 2s forwards 2.5s; text-align: center; z-index: 10; }
+        .next-btn {
+            display: inline-block; margin-top: 15px; padding: 12px 35px; background: #ff4d6d;
+            color: white; border-radius: 50px; text-decoration: none;
+            opacity: 0; animation: fadeIn 2s forwards 3.5s; transition: 0.3s;
+        }
+
+        @keyframes present { from { transform: translateY(150px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @keyframes popIn { to { transform: translateX(-50%) scale(1); } }
+        @keyframes fadeIn { to { opacity: 1; } }
+    </style>
+</head>
+<body>
+
+    <div class="bg-elements" id="bg-elements"></div>
+
+    <div class="container">
+        <div class="bouquet">
+            <div class="flower f1"><div class="petals"><div class="petal p1"></div><div class="petal p2"></div><div class="petal p3"></div><div class="petal p4"></div><div class="petal p5"></div><div class="petal p6"></div></div><div class="stem"></div></div>
+            <div class="flower f2"><div class="petals"><div class="petal p1"></div><div class="petal p2"></div><div class="petal p3"></div><div class="petal p4"></div><div class="petal p5"></div><div class="petal p6"></div></div><div class="stem" style="height: 270px;"></div></div>
+            <div class="flower f3"><div class="petals"><div class="petal p1"></div><div class="petal p2"></div><div class="petal p3"></div><div class="petal p4"></div><div class="petal p5"></div><div class="petal p6"></div></div><div class="stem" style="height: 280px;"></div></div>
+            <div class="flower f4"><div class="petals"><div class="petal p1"></div><div class="petal p2"></div><div class="petal p3"></div><div class="petal p4"></div><div class="petal p5"></div><div class="petal p6"></div></div><div class="stem" style="height: 270px;"></div></div>
+            <div class="flower f5"><div class="petals"><div class="petal p1"></div><div class="petal p2"></div><div class="petal p3"></div><div class="petal p4"></div><div class="petal p5"></div><div class="petal p6"></div></div><div class="stem"></div></div>
+            <div class="flower f6"><div class="petals"><div class="petal p1"></div><div class="petal p2"></div><div class="petal p3"></div><div class="petal p4"></div><div class="petal p5"></div><div class="petal p6"></div></div><div class="stem" style="height: 230px;"></div></div>
+            <div class="flower f7"><div class="petals"><div class="petal p1"></div><div class="petal p2"></div><div class="petal p3"></div><div class="petal p4"></div><div class="petal p5"></div><div class="petal p6"></div></div><div class="stem" style="height: 230px;"></div></div>
+            <div class="flower f8"><div class="petals"><div class="petal p1"></div><div class="petal p2"></div><div class="petal p3"></div><div class="petal p4"></div><div class="petal p5"></div><div class="petal p6"></div></div><div class="stem" style="height: 220px;"></div></div>
+            
+            <div class="bow-container">
+                <div class="loop left"></div>
+                <div class="loop right"></div>
+                <div class="bow-center"></div>
+                <div class="tail left"></div>
+                <div class="tail right"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="message">
+        <h2>For You</h2>
+        <p>I know Lilies are your favorite.</p>
+        <a href="transition.html" class="next-btn">Our Story Starts Here</a>
+    </div>
+
+    <script>
+        function createBgElements() {
+            const container = document.getElementById('bg-elements');
+            const symbols = ['❤️', '🌸', '✨', '🤍'];
+            
+            for (let i = 0; i < 20; i++) {
+                const el = document.createElement('div');
+                el.className = Math.random() > 0.5 ? 'heart' : 'bg-flower';
+                el.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+                el.style.left = Math.random() * 100 + 'vw';
+                el.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                el.style.fontSize = (Math.random() * 15 + 15) + 'px';
+                el.style.animationDelay = (Math.random() * 5) + 's';
+                container.appendChild(el);
+            }
+        }
+        createBgElements();
+    </script>
+</body>
+</html>

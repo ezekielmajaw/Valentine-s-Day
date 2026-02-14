@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Journey Begins</title>
+    <style>
+        :root {
+            --deep-pink: #ff4d6d;
+            --soft-white: #fffafa;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background-color: #ffb3c1;
+            font-family: 'Georgia', serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .mist-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,182,193,0.8) 0%, rgba(255,255,255,1) 100%);
+            backdrop-filter: blur(10px);
+            z-index: 5;
+            transition: opacity 2s ease;
+        }
+
+        .content {
+            text-align: center;
+            z-index: 10;
+            color: #c9184a;
+            padding: 30px;
+            opacity: 0;
+            transform: scale(0.9);
+            animation: emerge 2s forwards 0.5s;
+            max-width: 550px; /* Constraining width makes justified text look better */
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+
+        p {
+            font-size: 1.2rem;
+            line-height: 1.8; /* Increased line height for better readability */
+            margin-bottom: 40px;
+            text-align: justify; /* This justifies your text */
+            hyphens: auto; /* Adds hyphens to avoid big gaps if needed */
+        }
+
+        .path-btn {
+            background: var(--deep-pink);
+            color: white;
+            padding: 15px 45px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 20px rgba(255, 77, 109, 0.3);
+            transition: 0.3s;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+        }
+
+        .path-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(255, 77, 109, 0.5);
+        }
+
+        @keyframes emerge {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .fade-out {
+            animation: finalFade 1.5s forwards;
+        }
+
+        @keyframes finalFade {
+            to { opacity: 0; filter: blur(20px); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="mist-container" id="mist"></div>
+
+    <div class="content" id="content">
+        <h1>Survivor Award: 8 Months! 🏆</h1>
+        <p>
+            You've officially survived 8 months (and counting) with me So I built this instead of doing my actual work and you are required to act impressed as you're about to go through a small memory lane of our journey together. I love you baby. 💌❤️
+        </p>
+        <button class="path-btn" onclick="goToMemories()">Start the Journey</button>
+    </div>
+
+    <script>
+        window.onload = () => {
+            document.getElementById('mist').style.opacity = '0.4';
+        };
+
+        function goToMemories() {
+            document.getElementById('content').classList.add('fade-out');
+            document.getElementById('mist').style.opacity = '1';
+            
+            setTimeout(() => {
+                window.location.href = 'memory.html';
+            }, 1200);
+        }
+    </script>
+
+</body>
+</html>
