@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Message</title>
+    <style>
+        :root {
+            --pink: #ff4d6d;
+            --dark-red: #310d0d;
+            --soft-bg: #fff5f5;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            background-color: var(--soft-bg);
+            font-family: 'Georgia', serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 1.5s ease;
+            overflow-x: hidden;
+        }
+
+        .cinema-mode {
+            background-color: var(--dark-red) !important;
+        }
+
+        /* --- GOOGLE DRIVE IFRAME CONTAINER --- */
+        .video-container {
+            position: relative;
+            width: 90%;
+            max-width: 800px;
+            aspect-ratio: 16 / 9; 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            border-radius: 15px;
+            overflow: hidden;
+            background: #000;
+            border: 4px solid white;
+            opacity: 0;
+            transform: scale(0.9);
+            animation: zoomIn 1s forwards 0.5s;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .header-text {
+            text-align: center;
+            color: #c9184a;
+            margin-bottom: 20px;
+            padding: 0 20px;
+            transition: opacity 1s;
+        }
+
+        h1 { font-size: 1.8rem; }
+
+        .final-message {
+            margin-top: 20px;
+            padding: 0 20px;
+            text-align: center;
+            color: var(--pink);
+            font-style: italic;
+            opacity: 1; 
+            transition: opacity 2s;
+        }
+
+        @keyframes zoomIn {
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .replay-btn {
+            margin-top: 20px;
+            padding: 12px 30px;
+            border: 2px solid var(--pink);
+            color: var(--pink);
+            background: white;
+            border-radius: 25px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block; 
+            font-weight: bold;
+            font-style: normal;
+        }
+    </style>
+</head>
+<body id="pageBody">
+
+    <div class="header-text" id="header">
+        <h1>One Last Surprise...</h1>
+        <p>I made this specifically for you.</p>
+    </div>
+
+    <div class="video-container" onclick="dimLights()">
+        <iframe 
+            src="https://drive.google.com/file/d/1pQ8-9v5H3lrnk1Bn8v_TRLpTIH3UQjcH/preview" 
+            allow="autoplay; fullscreen" 
+            allowfullscreen>
+        </iframe>
+    </div>
+
+    <div class="final-message" id="footer-msg">
+        <h2>I love you more than words can say. ❤️</h2>
+        <p>Happy Valentine's Day!</p>
+        <a href="index.html" class="replay-btn">Back to Start</a>
+    </div>
+
+    <script>
+        function dimLights() {
+            document.getElementById('pageBody').classList.add('cinema-mode');
+            document.getElementById('header').style.opacity = '0.3';
+        }
+        
+        // Stop the background music from previous pages
+        localStorage.setItem('musicPlaying', 'false');
+    </script>
+</body>
+</html>
